@@ -5,6 +5,8 @@ using UnityEngine;
 public class movement : MonoBehaviour
 {
     Animator animator;
+    public AudioClip coindesClip;
+    private AudioSource asrc;
     int isWalkingHash;
     int backwardsHash;
     int runrightHash;
@@ -19,6 +21,7 @@ public class movement : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        asrc = GetComponent<AudioSource>();
         animator = GetComponent<Animator>();
         isWalkingHash = Animator.StringToHash("isWalking");
         backwardsHash = Animator.StringToHash("backwards");
@@ -106,21 +109,30 @@ public class movement : MonoBehaviour
         }
 
 
-        if (Input.GetKey("w"))
-        {
-            transform.Translate(Vector3.forward * speedx * Time.deltaTime);
-        }
-        if (Input.GetKey("s"))
-        {
-            transform.Translate(Vector3.back * speedx * Time.deltaTime);
-        }
-        if (Input.GetKey("a"))
-        {
-            transform.Translate(Vector3.left * speedx * Time.deltaTime);
-        }
-        if (Input.GetKey("d"))
-        {
-            transform.Translate(Vector3.right * speedx * Time.deltaTime);
+        //if (input.getkey("w"))
+        //{
+        //    transform.translate(vector3.forward * speedx * time.deltatime);
+        //}
+        //if (input.getkey("s"))
+        //{
+        //    transform.translate(vector3.back * speedx * time.deltatime);
+        //}
+        //if (input.getkey("a"))
+        //{
+        //    transform.translate(vector3.left * speedx * time.deltatime);
+        //}
+        //if (input.getkey("d"))
+        //{
+        //    transform.translate(vector3.right * speedx * time.deltatime);
+        //}
+        float horiinput = Input.GetAxis("Horizontal");
+        float veriInput = Input.GetAxis("Vertical");
+        Vector3 Movedir = new Vector3(horiinput, 0, veriInput);
+        Movedir.Normalize();
+        transform.Translate(Movedir * speed * Time.deltaTime, Space.World);
+        if (Movedir != Vector3.zero) {
+            Quaternion torot = Quaternion.LookRotation(Movedir, Vector3.up);
+            transform.rotation = Quaternion.RotateTowards(transform.rotation, torot, speedx * Time.deltaTime); 
         }
 
     }

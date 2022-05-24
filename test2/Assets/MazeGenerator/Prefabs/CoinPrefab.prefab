@@ -132,6 +132,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d1b257c5ecba31840ad74e2582fbaa1a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  coindesClip: {fileID: 8300000, guid: c36e1566d91c36b43b6b200c32cca26e, type: 3}
 --- !u!54 &-1871956969921189017
 Rigidbody:
   m_ObjectHideFlags: 0
