@@ -13,6 +13,9 @@ public class movement : MonoBehaviour
     int runbackleftHash;
     int jumpHash;
     Vector3 mouseX;
+    public float speed = 5.0f;
+    public float speedx = 5.0f;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -44,6 +47,7 @@ public class movement : MonoBehaviour
         bool runbackrightPressed = Input.GetKey("s") & Input.GetKey("d") ? true : false;
         bool runbackleftPressed = Input.GetKey("s") & Input.GetKey("a") ? true : false;
         bool jumpPressed = Input.GetKey("space");
+
         if (!isWalking && forwardPressed)
         {
             animator.SetBool("isWalking", true);
@@ -99,6 +103,24 @@ public class movement : MonoBehaviour
         if (ju && !jumpPressed)
         {
             animator.SetBool("jump", false);
+        }
+
+
+        if (Input.GetKey("w"))
+        {
+            transform.Translate(Vector3.forward * speedx * Time.deltaTime);
+        }
+        if (Input.GetKey("s"))
+        {
+            transform.Translate(Vector3.back * speedx * Time.deltaTime);
+        }
+        if (Input.GetKey("a"))
+        {
+            transform.Translate(Vector3.left * speedx * Time.deltaTime);
+        }
+        if (Input.GetKey("d"))
+        {
+            transform.Translate(Vector3.right * speedx * Time.deltaTime);
         }
 
     }
